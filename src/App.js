@@ -1,25 +1,35 @@
-import logo from './logo.svg';
+import React from 'react'
 import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { increaseNumber, decreaseNumber } from './action';
 
-function App() {
+const App = () => {
+
+  const myState = useSelector((state) =>
+    state.changeTheNumber
+  );
+
+  const dispatch = useDispatch();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <div className="container">
+        <h1>
+          Redux apk
+        </h1>
+
+        <h4>Increment/Decrement counter</h4>
+
+        <div className="quantity">
+          <a onClick={() => dispatch(decreaseNumber())} className="quantity__minus" title="Decrement" ><span>-</span></a>
+
+          <input name="quantity" type="text" className="quantity__input" value={myState} />
+
+          <a onClick={() => dispatch(increaseNumber(5))} className="quantity__plus" title="Increment" ><span>+</span></a>
+        </div>
+
+      </div>
+    </div>)
 }
 
-export default App;
+export default App
